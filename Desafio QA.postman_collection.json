@@ -1,55 +1,53 @@
 {
 	"info": {
-		"_postman_id": "6dc84589-f3a7-47bb-be2f-394cffda9e0f",
-		"name": "Desafio QA",
+		"_postman_id": "219b545b-5f89-4230-876a-795e1189bf07",
+		"name": "API Desafio QA Automação",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Testes",
+			"name": "Request GET",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"O código de status é 200\", function () {\r",
-							"pm.response.to.have.status(200);\r",
+							"pm.test(\"Código de status é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Tempo de resposta é menor que 200ms\", function () {\r",
-							"pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"pm.test(\"Retorno do body é 'Falle'\", function () {\r",
+							"    pm.response.to.have.body(\"Falle\");\r",
 							"});\r",
 							"\r",
-							"pm.test(\"O retorno é uma STRING\", () =>\r",
+							"pm.test(\"Response Size é igual a 5\", () => \r",
 							"{\r",
-							"pm.expect(pm.response).to.be.a('string');\r",
-							"})\r",
-							"\r",
-							"pm.test(\"Body is correct\", function () {\r",
-							"    pm.response.to.have.body(\"response_body_string\");\r",
+							"    pm.expect(pm.response.responseSize).to.be.equal(5);\r",
 							"});\r",
 							"\r",
-							""
+							"pm.test(\"Tempo de resposta é menor que 20ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Nome do Status Code é OK\", () => {\r",
+							"  pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header Date está presente\", () => {\r",
+							"  pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"pm.test(\"Retorno da resposta é um object\", () => {\r",
+							"  pm.expect(pm.response).to.be.an(\"object\");\r",
+							"//pm.expect(jsonData.name).to.be.a(\"string\");\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
 				}
 			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
 					"raw": "https://localhost:7249/WeatherForecast",
 					"protocol": "https",
@@ -65,30 +63,290 @@
 			"response": []
 		},
 		{
-			"name": "Nomes",
+			"name": "Request POST le",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Código de status é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno do body é 'testado'\", function () {\r",
+							"    pm.response.to.have.body(\"testado\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Size é igual a 7\", () => \r",
+							"{\r",
+							"    pm.expect(pm.response.responseSize).to.be.equal(7);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de resposta é menor que 20ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Nome do Status Code é OK\", () => {\r",
+							"  pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header Date está presente\", () => {\r",
+							"  pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno da resposta é um object\", () => {\r",
+							"  pm.expect(pm.response).to.be.an(\"object\");\r",
+							"//pm.expect(jsonData.name).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"le\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
-							"language": "json"
+							"language": "text"
 						}
 					}
 				},
 				"url": {
-					"raw": "https://localhost:7249/swagger/v1/swagger.json",
+					"raw": "https://localhost:7249/WeatherForecast?nome=le",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
 					"port": "7249",
 					"path": [
-						"swagger",
-						"v1",
-						"swagger.json"
+						"WeatherForecast"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "le"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request POST Fall",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Código de status é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno do body é 'ok'\", function () {\r",
+							"    pm.response.to.have.body(\"ok\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Size é igual a 2\", () => \r",
+							"{\r",
+							"    pm.expect(pm.response.responseSize).to.be.equal(2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de resposta é menor que 20ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Nome do Status Code é OK\", () => {\r",
+							"  pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header Date está presente\", () => {\r",
+							"  pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno da resposta é um object\", () => {\r",
+							"  pm.expect(pm.response).to.be.an(\"object\");\r",
+							"//pm.expect(jsonData.name).to.be.a(\"string\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7249/WeatherForecast?nome=Fall",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7249",
+					"path": [
+						"WeatherForecast"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "Fall"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request POST Nome Inválido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Código de status é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno do body é 'Nome inválido'\", function () {\r",
+							"    pm.response.to.have.body(\"Nome inválido\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Size é igual a 14\", () => \r",
+							"{\r",
+							"    pm.expect(pm.response.responseSize).to.be.equal(14);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de resposta é menor que 20ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Nome do Status Code é OK\", () => {\r",
+							"  pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header Date está presente\", () => {\r",
+							"  pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno da resposta é um object\", () => {\r",
+							"  pm.expect(pm.response).to.be.an(\"object\");\r",
+							"//pm.expect(jsonData.name).to.be.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7249/WeatherForecast?nome=Gabriel",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7249",
+					"path": [
+						"WeatherForecast"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "Gabriel"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request POST Sem Nome",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Código de status é 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Resposta avisa que o campo 'nome' é necessário\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"The nome field is required.\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Size é igual a 241\", () => \r",
+							"{\r",
+							"    pm.expect(pm.response.responseSize).to.be.equal(241);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de resposta é menor que 20ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Nome do Status Code é Bad Request\", () => {\r",
+							"  pm.response.to.have.status(\"Bad Request\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Header Date está presente\", () => {\r",
+							"  pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Retorno da resposta é um object\", () => {\r",
+							"  pm.expect(pm.response).to.be.an(\"object\");\r",
+							"//pm.expect(jsonData.name).to.be.a(\"string\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7249/WeatherForecast",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7249",
+					"path": [
+						"WeatherForecast"
 					]
 				}
 			},
